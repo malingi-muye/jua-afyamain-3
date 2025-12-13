@@ -3,7 +3,7 @@
 import { redirect } from 'next/navigation'
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
-import DashboardContent from '@/components/dashboard/dashboard-content'
+import RoleBasedDashboard from '@/components/dashboard/role-based-dashboard'
 import { db } from '@/services/db'
 
 async function getDashboardData() {
