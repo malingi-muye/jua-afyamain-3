@@ -1,10 +1,7 @@
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://placeholder.supabase.co"
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "placeholder"
+// Re-export from the supabase/client module for backward compatibility
+export { getSupabase, createClient, supabase } from "./supabase/client"
 
-if (SUPABASE_URL === "https://placeholder.supabase.co") {
-  console.warn("Supabase not configured. App running in DEMO MODE with local mock data.")
-}
-
+// Keep the SQL schema instructions below for reference
 // --- SQL SCHEMA INSTRUCTIONS ---
 // Ensure your Supabase Database has the following tables.
 // Run this SQL in your Supabase SQL Editor.
