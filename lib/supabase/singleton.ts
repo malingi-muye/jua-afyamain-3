@@ -10,12 +10,12 @@ export function getSupabaseClient() {
   }
 
   if (_client === null) {
-    const url = process.env.NEXT_PUBLIC_SUPABASE_URL
-    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    const url = import.meta.env.VITE_NEXT_SUPABASE_URL || import.meta.env.NEXT_PUBLIC_SUPABASE_URL
+    const key = import.meta.env.VITE_NEXT_SUPABASE_ANON_KEY || import.meta.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
     if (!url || !key) {
       throw new Error(
-        "Missing Supabase credentials. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY",
+        "Missing Supabase credentials. Please set VITE_NEXT_SUPABASE_URL and VITE_NEXT_SUPABASE_ANON_KEY environment variables",
       )
     }
 
