@@ -1,0 +1,33 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[context.production.environment]
+  VITE_SUPABASE_URL = "https://tlraaxpemekmjpcbwpny.supabase.co"
+  VITE_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRscmFheHBlbWVrbWpwY2J3cG55Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU1MjI2MDIsImV4cCI6MjA4MTA5ODYwMn0.wOQxIIge7NJES8vVPRV967rJU7vf49Of5GbZLZt7EoQ"
+  VITE_GEMINI_API_KEY = "AIzaSyD7-4sPt0JIuhDkBcJplybtZyeP5cVb_mg"
+
+[context.deploy-preview.environment]
+  VITE_SUPABASE_URL = "https://tlraaxpemekmjpcbwpny.supabase.co"
+  VITE_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRscmFheHBlbWVrbWpwY2J3cG55Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU1MjI2MDIsImV4cCI6MjA4MTA5ODYwMn0.wOQxIIge7NJES8vVPRV967rJU7vf49Of5GbZLZt7EoQ"
+  VITE_GEMINI_API_KEY = "AIzaSyD7-4sPt0JIuhDkBcJplybtZyeP5cVb_mg"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, immutable, max-age=31536000"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Content-Type = "application/javascript; charset=utf-8"
+
+[[headers]]
+  for = "/*.mjs"
+  [headers.values]
+    Content-Type = "application/javascript; charset=utf-8"
