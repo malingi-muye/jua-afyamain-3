@@ -152,18 +152,18 @@ Open React DevTools Profiler:
 
 ### 3. Check Performance Metrics
 Open browser console:
-```javascript
+\`\`\`javascript
 // View all metrics
 window.performanceMonitor.getSummary()
 
 // Export for analysis
 window.performanceMonitor.export()
-```
+\`\`\`
 
 ### 4. Check Bundle Size
-```bash
+\`\`\`bash
 npm run build
-```
+\`\`\`
 Check dist/ folder size
 
 ---
@@ -173,18 +173,18 @@ Check dist/ folder size
 ### For Existing Components
 
 **Old Pattern** (Direct Zustand):
-```typescript
+\`\`\`typescript
 const { patients, addPatient } = useStore()
-```
+\`\`\`
 
 **New Pattern** (React Query):
-```typescript
+\`\`\`typescript
 const { data: patients } = usePatients()
 const createPatient = useCreatePatient()
 
 // Usage
 createPatient.mutate(newPatient)
-```
+\`\`\`
 
 ### For New Features
 

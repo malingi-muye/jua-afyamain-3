@@ -22,11 +22,11 @@ This document outlines the comprehensive performance optimizations implemented i
 - `index.tsx` - QueryClient configuration
 
 **Usage Example**:
-```typescript
+\`\`\`typescript
 // Instead of fetching in useEffect:
 const { data: patients, isLoading } = usePatients()
 const createPatient = useCreatePatient()
-```
+\`\`\`
 
 ---
 
@@ -62,14 +62,14 @@ const createPatient = useCreatePatient()
 - `components/Dashboard.tsx` - Granular selectors
 
 **Before**:
-```typescript
+\`\`\`typescript
 const { patients, appointments, inventory } = useStore() // Re-renders on ANY store change
-```
+\`\`\`
 
 **After**:
-```typescript
+\`\`\`typescript
 const patients = useStore(state => state.patients) // Only re-renders when patients change
-```
+\`\`\`
 
 ---
 
@@ -86,12 +86,12 @@ const patients = useStore(state => state.patients) // Only re-renders when patie
 - `services/db.ts` - Optimized queries
 
 **Recommended Indexes** (run in Supabase SQL editor):
-```sql
+\`\`\`sql
 CREATE INDEX IF NOT EXISTS idx_patients_updated_at ON patients(updated_at DESC);
 CREATE INDEX IF NOT EXISTS idx_appointments_date ON appointments(date ASC);
 CREATE INDEX IF NOT EXISTS idx_visits_stage ON visits(stage) WHERE stage != 'Completed';
 CREATE INDEX IF NOT EXISTS idx_inventory_stock ON inventory(stock) WHERE stock <= reorder_level;
-```
+\`\`\`
 
 ---
 
@@ -110,10 +110,10 @@ CREATE INDEX IF NOT EXISTS idx_inventory_stock ON inventory(stock) WHERE stock <
 - `components/OptimizedImage.tsx`
 
 **Usage**:
-```typescript
+\`\`\`typescript
 <OptimizedImage src={url} alt="Patient" lazy />
 <AvatarImage src={user.avatar} name={user.name} size="md" />
-```
+\`\`\`
 
 ---
 
@@ -132,7 +132,7 @@ CREATE INDEX IF NOT EXISTS idx_inventory_stock ON inventory(stock) WHERE stock <
 - `lib/performance.ts`
 
 **Usage**:
-```typescript
+\`\`\`typescript
 import { performanceMonitor } from '@/lib/performance'
 
 performanceMonitor.mark('my_operation')
@@ -141,7 +141,7 @@ performanceMonitor.measure('my_operation')
 
 // View metrics in console
 console.log(performanceMonitor.getSummary())
-```
+\`\`\`
 
 ---
 
@@ -171,7 +171,7 @@ console.log(performanceMonitor.getSummary())
 ## Best Practices for Developers
 
 ### 1. Always Use React Query for Data Fetching
-```typescript
+\`\`\`typescript
 // ❌ Don't
 useEffect(() => {
   fetch('/api/patients').then(setPatients)
@@ -179,43 +179,43 @@ useEffect(() => {
 
 // ✅ Do
 const { data: patients } = usePatients()
-```
+\`\`\`
 
 ### 2. Use Granular Selectors
-```typescript
+\`\`\`typescript
 // ❌ Don't
 const { patients, appointments, inventory } = useStore()
 
 // ✅ Do
 const patients = useStore(state => state.patients)
-```
+\`\`\`
 
 ### 3. Memoize Expensive Components
-```typescript
+\`\`\`typescript
 // ❌ Don't
 export default MyComponent
 
 // ✅ Do
 export default memo(MyComponent)
-```
+\`\`\`
 
 ### 4. Use Callbacks for Event Handlers
-```typescript
+\`\`\`typescript
 // ❌ Don't
 const handleClick = () => doSomething()
 
 // ✅ Do
 const handleClick = useCallback(() => doSomething(), [dependencies])
-```
+\`\`\`
 
 ### 5. Lazy Load Images
-```typescript
+\`\`\`typescript
 // ❌ Don't
 <img src={url} alt="..." />
 
 // ✅ Do
 <OptimizedImage src={url} alt="..." lazy />
-```
+\`\`\`
 
 ---
 
@@ -223,15 +223,15 @@ const handleClick = useCallback(() => doSomething(), [dependencies])
 
 ### View Performance Metrics
 Open browser console and run:
-```javascript
+\`\`\`javascript
 window.performanceMonitor?.getSummary()
-```
+\`\`\`
 
 ### Export Metrics for Analysis
-```javascript
+\`\`\`javascript
 const metrics = window.performanceMonitor?.export()
 console.log(JSON.stringify(metrics, null, 2))
-```
+\`\`\`
 
 ---
 

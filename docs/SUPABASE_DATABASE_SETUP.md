@@ -24,7 +24,7 @@ This means:
 
 Copy and paste this SQL into the editor:
 
-```sql
+\`\`\`sql
 -- Create clinics table
 CREATE TABLE IF NOT EXISTS clinics (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -103,7 +103,7 @@ USING (auth.role() = 'service_role');
 CREATE POLICY "Clinic owners can update their clinic"
 ON clinics FOR UPDATE
 USING (owner_id = auth.uid());
-```
+\`\`\`
 
 ---
 
@@ -127,7 +127,7 @@ Now create a test user profile in the `users` table. You'll need:
 
 **To create the user profile, run this SQL:**
 
-```sql
+\`\`\`sql
 -- Replace 'YOUR_USER_ID' with your actual user ID from auth.users
 -- Replace 'your-email@example.com' with your actual email
 INSERT INTO users (id, email, full_name, role, status)
@@ -143,7 +143,7 @@ ON CONFLICT (id) DO UPDATE SET
   role = 'admin',
   status = 'active'
 RETURNING *;
-```
+\`\`\`
 
 ---
 
@@ -152,10 +152,10 @@ RETURNING *;
 1. Refresh your app (F5)
 2. You should now see the dashboard load
 3. Check browser console (F12 > Console) for messages like:
-   ```
+   \`\`\`
    ✅ Supabase Configuration Status: READY
    [useEnterpriseAuth] Profile fetch result: { found: true, elapsed: 1200ms }
-   ```
+   \`\`\`
 
 ---
 
@@ -166,9 +166,9 @@ RETURNING *;
 **Issue**: RLS policy blocking access
 
 **Solution**: Temporarily disable RLS for testing:
-```sql
+\`\`\`sql
 ALTER TABLE users DISABLE ROW LEVEL SECURITY;
-```
+\`\`\`
 
 Then test. If it works, the issue is RLS policies. Re-enable and adjust policies.
 

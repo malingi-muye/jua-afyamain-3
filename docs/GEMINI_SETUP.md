@@ -48,9 +48,9 @@ There are two ways to add your Gemini API key to Supabase:
 
 1. Create a `.env.local` file in your project root (same directory as `package.json`)
 2. Add the following line:
-   ```
+   \`\`\`
    GEMINI_API_KEY=your-api-key-here
-   ```
+   \`\`\`
 3. Save the file
 4. The CLI will automatically pick up this variable when running the dev server
 
@@ -61,9 +61,9 @@ The Gemini Chat edge function needs to be deployed to access the API key:
 1. Open your terminal
 2. Navigate to your project directory
 3. Run the following command:
-   ```bash
+   \`\`\`bash
    supabase functions deploy gemini-chat
-   ```
+   \`\`\`
 4. Wait for the deployment to complete
 5. You should see a message like: `✓ Function deployed successfully`
 
@@ -71,9 +71,9 @@ The Gemini Chat edge function needs to be deployed to access the API key:
 
 1. Stop the dev server (press `Ctrl+C`)
 2. Restart it:
-   ```bash
+   \`\`\`bash
    npm run dev
-   ```
+   \`\`\`
 3. The browser should automatically reload
 
 ## Verification
@@ -85,10 +85,10 @@ Once you've completed the setup, verify that Gemini is working:
 1. Open your browser's developer tools (F12 or right-click → Inspect)
 2. Go to the **Console** tab
 3. Look for a message like:
-   ```
+   \`\`\`
    ✅ Gemini Configuration Status: READY
    AI features are enabled and ready to use
-   ```
+   \`\`\`
 
 ### Test a Feature
 
@@ -123,13 +123,13 @@ If you see an error or the chat button doesn't appear, see the **Troubleshooting
    - Secret name should be exactly: `GEMINI_API_KEY`
    - Secret value should be your Google API key
 2. Re-deploy the edge function:
-   ```bash
+   \`\`\`bash
    supabase functions deploy gemini-chat
-   ```
+   \`\`\`
 3. Restart the dev server:
-   ```bash
+   \`\`\`bash
    npm run dev
-   ```
+   \`\`\`
 
 ### Issue: "The Gemini API key is invalid or expired"
 
@@ -144,9 +144,9 @@ If you see an error or the chat button doesn't appear, see the **Troubleshooting
    - Click on the `GEMINI_API_KEY` secret
    - Click **Edit** and paste the new key
 5. Re-deploy the edge function:
-   ```bash
+   \`\`\`bash
    supabase functions deploy gemini-chat
-   ```
+   \`\`\`
 
 ### Issue: "Gemini API rate limit exceeded"
 

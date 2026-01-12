@@ -30,7 +30,7 @@ Use this checklist to verify the Gemini integration is working correctly:
 6. No error toasts or warnings
 
 **Test Steps**:
-```bash
+\`\`\`bash
 # 1. Verify API key is set
 # Check Supabase Dashboard → Settings → Edge Function Secrets
 # Should see GEMINI_API_KEY listed
@@ -58,7 +58,7 @@ npm run dev
 # 8. Verify console has clean logs
 # Should see: [Gemini] Chat response received
 # No error messages
-```
+\`\`\`
 
 **Pass Criteria**:
 - ✅ Chat button visible and functional
@@ -80,7 +80,7 @@ npm run dev
 5. App functions normally (Gemini features just unavailable)
 
 **Test Steps**:
-```bash
+\`\`\`bash
 # 1. Remove or comment out the GEMINI_API_KEY in Supabase
 # Supabase Dashboard → Settings → Edge Function Secrets
 # Delete the GEMINI_API_KEY secret
@@ -102,7 +102,7 @@ npm run dev
 
 # 6. Verify app is fully functional otherwise
 # All other features should work normally
-```
+\`\`\`
 
 **Pass Criteria**:
 - ✅ Chat button is hidden (not shown, not disabled)
@@ -127,7 +127,7 @@ npm run dev
 4. Setup documentation link shown
 
 **Test Steps**:
-```bash
+\`\`\`bash
 # 1. Set invalid API key in Supabase
 # Supabase Dashboard → Settings → Edge Function Secrets
 # GEMINI_API_KEY = "invalid-key-12345"
@@ -153,7 +153,7 @@ npm run dev
 # Should re-check configuration and update status
 
 # 8. Chat button should disappear after retry confirms key is invalid
-```
+\`\`\`
 
 **Pass Criteria**:
 - ✅ Error message is user-friendly (not technical error code)
@@ -178,7 +178,7 @@ npm run dev
 **Test Steps**:
 
 #### Option A: Simulate Network Failure (Chrome DevTools)
-```bash
+\`\`\`bash
 # 1. Start dev server with valid API key
 npm run dev
 
@@ -199,10 +199,10 @@ npm run dev
 
 # 6. Resume the network request
 # Retry button should now work
-```
+\`\`\`
 
 #### Option B: Wait for Actual Timeout
-```bash
+\`\`\`bash
 # 1. Send multiple messages rapidly
 # If you hit rate limiting or Gemini API is slow:
 # You'll see timeout errors naturally
@@ -211,7 +211,7 @@ npm run dev
 # Error message is clear
 # Retry logic works
 # Console shows proper categorization
-```
+\`\`\`
 
 **Pass Criteria**:
 - ✅ Loading state shows for reasonable time
@@ -234,7 +234,7 @@ npm run dev
 4. Messages succeed again after the rate limit window passes
 
 **Test Steps**:
-```bash
+\`\`\`bash
 # 1. Start dev server with valid API key
 npm run dev
 
@@ -254,7 +254,7 @@ npm run dev
 
 # 6. Check console
 # Should show exponential backoff delays: 1s, 2s, 4s
-```
+\`\`\`
 
 **Pass Criteria**:
 - ✅ Error message is clear (not technical error)
@@ -276,7 +276,7 @@ npm run dev
 3. User sees actionable error message
 
 **Test Steps**:
-```bash
+\`\`\`bash
 # 1. Verify edge function is NOT deployed
 supabase functions list
 # Should NOT show gemini-chat in the list
@@ -298,7 +298,7 @@ npm run dev
 
 # 7. Send chat message again
 # Should now work
-```
+\`\`\`
 
 **Pass Criteria**:
 - ✅ Error indicates deployment issue (not just "failed")
@@ -312,7 +312,7 @@ npm run dev
 **Objective**: Verify that logging is clean and informative
 
 **Test Steps**:
-```bash
+\`\`\`bash
 # 1. Open browser to http://localhost:3000
 # Open Console (F12 → Console tab)
 
@@ -336,7 +336,7 @@ npm run dev
 # - Should be no red error messages
 # - Should be no undefined references
 # - Should be no stack traces
-```
+\`\`\`
 
 **Pass Criteria**:
 - ✅ All logs have consistent prefix (`[Gemini]`, `[ChatBot]`, etc.)
@@ -351,7 +351,7 @@ npm run dev
 **Objective**: Verify that configuration checks are cached to avoid repeated calls
 
 **Test Steps**:
-```bash
+\`\`\`bash
 # 1. Start dev server
 npm run dev
 
@@ -374,7 +374,7 @@ npm run dev
 # 6. Verify caching works
 # Config checks should not spam the console
 # Each page load should only check once
-```
+\`\`\`
 
 **Pass Criteria**:
 - ✅ Configuration is checked on page load
@@ -389,7 +389,7 @@ npm run dev
 ### ChatBot Component Tests
 
 #### Test 1: Mounting and Initialization
-```typescript
+\`\`\`typescript
 // Expected behavior:
 // 1. Component mounts
 // 2. Checks Gemini availability immediately
@@ -400,31 +400,31 @@ npm run dev
 // - In console, see "[ChatBot] Checking Gemini availability..."
 // - Chat button appears if available, hidden if not
 // - No React errors in console
-```
+\`\`\`
 
 #### Test 2: Opening and Closing Chat
-```
+\`\`\`
 // Send a message
 // Verify history is maintained
 // Close and reopen chat
 // History should still be there (session memory)
 // Reload page
 // History should be cleared (new session)
-```
+\`\`\`
 
 #### Test 3: Error Recovery
-```
+\`\`\`
 // Simulate error (invalid key or offline)
 // Send message - error appears
 // Click Retry button
 // Should recheck configuration
 // If fixed, chat should work now
-```
+\`\`\`
 
 ### GeminiFeatureGuard Component Tests
 
 #### Test 1: Available Feature
-```
+\`\`\`
 // Wrap a component with GeminiFeatureGuard
 // <GeminiFeatureGuard>
 //   <SomeFeature />
@@ -432,10 +432,10 @@ npm run dev
 
 // If Gemini is available: Should render <SomeFeature />
 // If not available: Should show warning message with setup link
-```
+\`\`\`
 
 #### Test 2: Custom Fallback
-```
+\`\`\`
 // <GeminiFeatureGuard
 //   featureName="Analysis Feature"
 //   fallback={<CustomMessage />}
@@ -444,7 +444,7 @@ npm run dev
 // </GeminiFeatureGuard>
 
 // Should render custom fallback when unavailable
-```
+\`\`\`
 
 ---
 
@@ -482,13 +482,13 @@ For each retryable error:
 
 Measure response time for typical interactions:
 
-```
+\`\`\`
 Chat Message: 1-3 seconds
 Patient Notes Analysis: 2-5 seconds
 SMS Draft: 1-2 seconds
 Daily Briefing: 2-4 seconds
 Staff Assistant: 2-4 seconds
-```
+\`\`\`
 
 If times are consistently longer:
 - Check internet connection
@@ -578,11 +578,11 @@ Before deploying to production:
 ### Enable Verbose Logging
 
 Set in `vite.config.ts`:
-```typescript
+\`\`\`typescript
 define: {
   'import.meta.env.VITE_VERBOSE_LOGS': JSON.stringify(true),
 }
-```
+\`\`\`
 
 Then check console for more detailed logs.
 
@@ -599,23 +599,23 @@ Then check console for more detailed logs.
 
 ### Check Edge Function Logs
 
-```bash
+\`\`\`bash
 # View real-time logs from edge function
 supabase functions logs gemini-chat
 
 # Or check in Supabase Dashboard:
 # → Functions → gemini-chat → Logs
-```
+\`\`\`
 
 ### Test API Directly
 
-```bash
+\`\`\`bash
 # Test the edge function directly
 curl -X POST https://YOUR_PROJECT.supabase.co/functions/v1/gemini-chat \
   -H "Authorization: Bearer YOUR_ANON_KEY" \
   -H "Content-Type: application/json" \
   -d '{"prompt": "test", "model": "gemini-2.0-flash"}'
-```
+\`\`\`
 
 ---
 

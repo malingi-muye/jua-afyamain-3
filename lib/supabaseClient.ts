@@ -1,4 +1,3 @@
-
 // Lightweight wrapper for initializing a Supabase client for legacy imports.
 import { createClient as createSupabaseClient } from "@supabase/supabase-js"
 

@@ -20,10 +20,10 @@ This guide walks you through setting up and using all the new enterprise feature
    - Copy the 16-character password
 
 3. **Set Environment Variables** in Supabase Dashboard
-   ```
+   \`\`\`
    GMAIL_SMTP_USER=your-email@gmail.com
    GMAIL_SMTP_PASSWORD=xxxx xxxx xxxx xxxx  (the 16-char app password)
-   ```
+   \`\`\`
 
 ### Using Email Features
 
@@ -32,7 +32,7 @@ This guide walks you through setting up and using all the new enterprise feature
 - Can be sent manually using `sendEmail()` function in code
 
 **Email Service Functions:**
-```typescript
+\`\`\`typescript
 import { sendAppointmentConfirmation, sendPasswordResetEmail } from '@/services/emailService'
 
 // Send appointment confirmation
@@ -44,7 +44,7 @@ await sendAppointmentConfirmation(
   'Dr. Smith',
   'Main Clinic'
 )
-```
+\`\`\`
 
 ---
 
@@ -60,11 +60,11 @@ await sendAppointmentConfirmation(
    - Twilio Phone Number (the one you'll send from)
 
 3. **Set Environment Variables** in Supabase Dashboard
-   ```
+   \`\`\`
    TWILIO_ACCOUNT_SID=your-sid
    TWILIO_AUTH_TOKEN=your-token
    TWILIO_PHONE_NUMBER=+1234567890
-   ```
+   \`\`\`
 
 ### Using SMS Features
 
@@ -72,7 +72,7 @@ await sendAppointmentConfirmation(
 - Appointment confirmation SMS (sent when appointment is created if patient has phone number)
 
 **SMS Service Functions:**
-```typescript
+\`\`\`typescript
 import { sendAppointmentReminderSMS } from '@/services/smsService'
 
 // Send appointment reminder
@@ -84,7 +84,7 @@ await sendAppointmentReminderSMS(
   'Dr. Smith',              // Doctor name
   'Main Clinic'             // Clinic name
 )
-```
+\`\`\`
 
 **Phone Number Format:**
 - Automatically converts local Kenya numbers to international format
@@ -238,41 +238,41 @@ All create, update, and delete operations are now protected with:
 ## 🔍 Server-Side API Endpoints
 
 ### Patients API
-```
+\`\`\`
 GET    /api/patients              - List all patients (with clinic filter)
 POST   /api/patients              - Create new patient
 PUT    /api/patients/[id]         - Update patient
 DELETE /api/patients/[id]         - Delete patient
-```
+\`\`\`
 
 ### Appointments API
-```
+\`\`\`
 GET    /api/appointments          - List all appointments
 POST   /api/appointments          - Create new appointment
 PUT    /api/appointments/[id]     - Update appointment
 DELETE /api/appointments/[id]     - Delete appointment
-```
+\`\`\`
 
 ### Inventory API
-```
+\`\`\`
 GET    /api/inventory             - List all inventory
 POST   /api/inventory             - Create inventory item
 PUT    /api/inventory/[id]        - Update inventory item
 DELETE /api/inventory/[id]        - Delete inventory item
-```
+\`\`\`
 
 ### Admin Settings API
-```
+\`\`\`
 GET    /api/admin/settings        - Fetch current settings
 POST   /api/admin/settings        - Save settings
-```
+\`\`\`
 
 ---
 
 ## 🧪 Testing the Features
 
 ### Test Email Sending
-```javascript
+\`\`\`javascript
 // In browser console or component
 import { sendEmail } from '@/services/emailService'
 
@@ -281,26 +281,26 @@ await sendEmail({
   subject: 'Test Email',
   html: '<p>This is a test</p>'
 })
-```
+\`\`\`
 
 ### Test SMS Sending
-```javascript
+\`\`\`javascript
 import { sendSMS } from '@/services/smsService'
 
 await sendSMS({
   phone_number: '+254712345678',
   message: 'Test SMS from JuaAfya'
 })
-```
+\`\`\`
 
 ### Test Permissions
-```javascript
+\`\`\`javascript
 // Try to delete as non-admin user - should fail with 403
 fetch('/api/patients/patient-id', {
   method: 'DELETE'
 })
 // Should return: { error: 'Permission denied: patients.delete' }
-```
+\`\`\`
 
 ---
 

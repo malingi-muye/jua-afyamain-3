@@ -35,7 +35,7 @@
 ## Technical Details
 
 ### Before (Inefficient)
-```typescript
+\`\`\`typescript
 // Every message triggered this:
 export const sendMessageToChat = async (message: string) => {
   const { data: { user } } = await supabase.auth.getUser();
@@ -43,10 +43,10 @@ export const sendMessageToChat = async (message: string) => {
     .select('role').eq('id', user.id).single();
   // ... rest of logic
 }
-```
+\`\`\`
 
 ### After (Optimized)
-```typescript
+\`\`\`typescript
 // Role fetched once on component mount
 useEffect(() => {
   const { data: profile } = await supabase.from('users')
@@ -56,10 +56,10 @@ useEffect(() => {
 
 // Passed to each message
 const responseText = await sendMessageToChat(userMsg.text, userRole);
-```
+\`\`\`
 
 ### Super Admin Context
-```typescript
+\`\`\`typescript
 if (role === 'SuperAdmin' || role === 'super_admin') {
   return `
     Platform Overview (Super Admin):
@@ -69,7 +69,7 @@ if (role === 'SuperAdmin' || role === 'super_admin') {
     - Total Patients (All Clinics): ${totalPatients}
   `;
 }
-```
+\`\`\`
 
 ## Performance Impact
 
@@ -94,18 +94,18 @@ if (role === 'SuperAdmin' || role === 'super_admin') {
 ### Test the Fix
 1. Open the chatbot
 2. Check browser console - should see:
-   ```
+   \`\`\`
    [ChatBot] User role cached: Admin
-   ```
+   \`\`\`
 3. Send multiple messages
 4. Verify you DON'T see repeated:
-   ```
+   \`\`\`
    [Gemini] Fetching context for role Admin...
-   ```
+   \`\`\`
 5. Instead, you should see:
-   ```
+   \`\`\`
    [Gemini] Using role: Admin (cached: true)
-   ```
+   \`\`\`
 
 ### Test Super Admin Context
 1. Log in as Super Admin

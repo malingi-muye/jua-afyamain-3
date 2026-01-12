@@ -33,11 +33,11 @@ The app has **proper Supabase integration architecture** but is currently **NOT 
   - Better approach: Allow demo mode or show user-friendly error
 
 **Current Code**:
-```typescript
+\`\`\`typescript
 if (!url || !key) {
   throw new Error(`Supabase configuration missing...`)
 }
-```
+\`\`\`
 
 **Recommendation**: Consider graceful degradation with demo mode instead of hard fail.
 
@@ -47,7 +47,7 @@ if (!url || !key) {
 **File**: `hooks/useEnterpriseAuth.ts`
 
 **Architecture**:
-```
+\`\`\`
 useEnterpriseAuth Hook
 ├── Auth State Management (user, organization, isLoading)
 ├── User Data Fetching
@@ -58,7 +58,7 @@ useEnterpriseAuth Hook
 │   └── Prevents duplicate queries across multiple hook instances
 └── Global Auth Manager
     └── Single subscription to supabase.auth.onAuthStateChange
-```
+\`\`\`
 
 **Strengths** (After recent fixes):
 - ✅ Clinic fetch is now non-blocking (parallelized)
@@ -94,14 +94,14 @@ useEnterpriseAuth Hook
 **File**: `vite.config.ts`
 
 **Setup**:
-```javascript
+\`\`\`javascript
 define: {
   "import.meta.env.VITE_SUPABASE_URL": JSON.stringify(...)
   "import.meta.env.VITE_SUPABASE_ANON_KEY": JSON.stringify(...)
   "import.meta.env.NEXT_PUBLIC_SUPABASE_URL": JSON.stringify(...)
   "import.meta.env.NEXT_PUBLIC_SUPABASE_ANON_KEY": JSON.stringify(...)
 }
-```
+\`\`\`
 
 **Strengths**:
 - ✅ Supports both VITE_ and NEXT_PUBLIC_ prefixes
@@ -128,7 +128,7 @@ define: {
 ### Current Queries
 
 **1. User Authentication**
-```typescript
+\`\`\`typescript
 // Get auth user
 const authUserResult = await supabase.auth.getUser()
 
@@ -151,7 +151,7 @@ supabase
   .from("users")
   .update({ last_active_at: new Date().toISOString() })
   .eq("id", authUserId)
-```
+\`\`\`
 
 **Query Performance Analysis**:
 - ⚠️ User profile query selects all columns (wasteful)
@@ -164,11 +164,11 @@ supabase
 ## Timeout Configuration
 
 ### Current Values (Post-Fix)
-```typescript
+\`\`\`typescript
 AUTH_WARNING_MS = 8000    // 8 seconds - shows warning
 AUTH_TIMEOUT_MS = 15000   // 15 seconds - hard timeout
 FETCH_TIMEOUT_MS = 10000  // 10 seconds - per operation
-```
+\`\`\`
 
 **Rationale**:
 - ✅ Reasonable for typical network conditions
@@ -200,11 +200,11 @@ FETCH_TIMEOUT_MS = 10000  // 10 seconds - per operation
    - Clinic-based access control for clinics
 
 2. **Set Up Proper Policies**:
-   ```sql
+   \`\`\`sql
    CREATE POLICY "Users can access their own data" 
    ON users FOR SELECT 
    USING (auth.uid() = id);
-   ```
+   \`\`\`
 
 3. **Never store sensitive data in localStorage**
    - Currently using HttpOnly cookies ✅
@@ -219,15 +219,15 @@ FETCH_TIMEOUT_MS = 10000  // 10 seconds - per operation
 3. Note the **Project URL** and **Anon Key**
 
 ### Step 2: Set Environment Variables
-```bash
+\`\`\`bash
 VITE_SUPABASE_URL=https://your-project.supabase.co
 VITE_SUPABASE_ANON_KEY=your-anon-key-here
-```
+\`\`\`
 
 ### Step 3: Create Database Tables
 Run this SQL in Supabase SQL Editor:
 
-```sql
+\`\`\`sql
 -- Users table
 CREATE TABLE users (
   id UUID PRIMARY KEY REFERENCES auth.users(id),
@@ -270,12 +270,12 @@ ON users FOR SELECT USING (auth.uid() = id);
 
 CREATE POLICY "Users can update their own data"
 ON users FOR UPDATE USING (auth.uid() = id);
-```
+\`\`\`
 
 ### Step 4: Restart Dev Server
-```bash
+\`\`\`bash
 npm run dev
-```
+\`\`\`
 
 ---
 
@@ -305,13 +305,13 @@ npm run dev
 
 ### Browser Console Messages
 When configured, you'll see:
-```
+\`\`\`
 ✅ Supabase Configuration Status: READY
 [Supabase Client] Initializing with URL: https://...
 [useEnterpriseAuth] Starting auth initialization...
 [useEnterpriseAuth] Fetching user data for userId: abc123
 [useEnterpriseAuth] Profile fetch result: { found: true, elapsed: 1200ms }
-```
+\`\`\`
 
 ### Troubleshooting Steps
 1. Check browser console (F12 > Console)

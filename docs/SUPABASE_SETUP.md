@@ -30,10 +30,10 @@ You have two options:
 
 1. Create a `.env.local` file in your project root (same level as `package.json`)
 2. Add these lines:
-```bash
+\`\`\`bash
 VITE_SUPABASE_URL=https://YOUR_PROJECT_URL.supabase.co
 VITE_SUPABASE_ANON_KEY=YOUR_ANON_KEY_HERE
-```
+\`\`\`
 
 Replace:
 - `YOUR_PROJECT_URL` with your actual project URL (just the subdomain, not the full path)
@@ -44,18 +44,18 @@ Replace:
 #### Option B: Using DevServerControl (For Current Session)
 
 If you want to set environment variables for the current session without creating a file, you can ask the Assistant to use:
-```
+\`\`\`
 DevServerControl tool with set_env_variable:
 - VITE_SUPABASE_URL: https://YOUR_PROJECT_URL.supabase.co
 - VITE_SUPABASE_ANON_KEY: YOUR_ANON_KEY_HERE
-```
+\`\`\`
 
 ### Step 4: Restart the Dev Server
 
 After setting environment variables, restart the dev server:
-```bash
+\`\`\`bash
 npm run dev
-```
+\`\`\`
 
 The app should now:
 - ✅ No longer show timeout errors

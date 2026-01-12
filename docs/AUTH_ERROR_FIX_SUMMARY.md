@@ -1,10 +1,10 @@
 # Authentication Timeout Error - Fix Summary
 
 ## Error
-```
+\`\`\`
 Error fetching user data: Error: Auth user fetch timeout after 15s
     at http://localhost:48752/hooks/useEnterpriseAuth.ts:20:48
-```
+\`\`\`
 
 ## Root Cause
 The Supabase environment variables (`VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`) are **not configured**, causing the authentication initialization to timeout.
@@ -48,7 +48,7 @@ When credentials are missing, the app attempts to make real API calls with inval
 - Users will see clear console message on app load indicating if Supabase is configured
 
 **Console Output Examples**:
-```
+\`\`\`
 ✅ Supabase Configuration Status: READY
    URL: https://xxxxx...
 
@@ -61,7 +61,7 @@ When credentials are missing, the app attempts to make real API calls with inval
    To enable authentication, set these environment variables:
    - VITE_SUPABASE_URL
    - VITE_SUPABASE_ANON_KEY
-```
+\`\`\`
 
 ## How to Fix the Error
 
@@ -71,10 +71,10 @@ See `SUPABASE_SETUP.md` for detailed instructions.
 **TL;DR**:
 1. Get credentials from https://app.supabase.com
 2. Create `.env.local` with:
-   ```bash
+   \`\`\`bash
    VITE_SUPABASE_URL=https://your-project.supabase.co
    VITE_SUPABASE_ANON_KEY=your-anon-key
-   ```
+   \`\`\`
 3. Restart dev server (`npm run dev`)
 4. Check console - should see ✅ status message
 

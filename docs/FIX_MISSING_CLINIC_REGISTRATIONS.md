@@ -21,10 +21,10 @@ A database trigger has been created that automatically:
 ### Step 1: Run the Migration
 Execute the new migration file in your Supabase SQL Editor:
 
-```bash
+\`\`\`bash
 # The migration file is located at:
 supabase/migrations/20260110000000_auto_create_clinic_on_signup.sql
-```
+\`\`\`
 
 **To apply it:**
 1. Go to your Supabase Dashboard: https://tlraaxpemekmjpcbwpny.supabase.co
@@ -36,7 +36,7 @@ supabase/migrations/20260110000000_auto_create_clinic_on_signup.sql
 ### Step 2: Verify the Trigger
 After running the migration, verify it was created:
 
-```sql
+\`\`\`sql
 -- Check if trigger exists
 SELECT 
   trigger_name, 
@@ -45,7 +45,7 @@ SELECT
   action_statement
 FROM information_schema.triggers
 WHERE trigger_name = 'on_auth_user_created';
-```
+\`\`\`
 
 You should see:
 - `trigger_name`: `on_auth_user_created`
@@ -61,16 +61,16 @@ You should see:
 ### Step 4: Verify Data Mapping
 The code changes already handle case-insensitive status mapping in `services/db.ts`:
 
-```typescript
+\`\`\`typescript
 status: (c.status || '').toLowerCase() === 'pending' ? 'Pending' : ...
-```
+\`\`\`
 
 This ensures that `'pending'` from the database is correctly displayed as `'Pending'` in the UI.
 
 ## What the Trigger Does
 
 When a user signs up with this payload:
-```javascript
+\`\`\`javascript
 {
   email: "clinic@example.com",
   password: "SecurePass123!",
@@ -82,7 +82,7 @@ When a user signs up with this payload:
     }
   }
 }
-```
+\`\`\`
 
 The trigger automatically:
 1. **Creates a clinic** in `public.clinics`:
@@ -111,21 +111,21 @@ The trigger automatically:
 
 Modified `fetchData` to skip loading clinic-specific data (patients, inventory, etc.) for Super Admins, preventing unnecessary background requests.
 
-```typescript
+\`\`\`typescript
 if (currentUser.role === 'SuperAdmin' || currentUser.role === 'super_admin' as any) {
     set({ isAppLoading: false })
     return
 }
-```
+\`\`\`
 
 ### 2. Fixed Status Mapping
 **File**: `services/db.ts`
 
 Updated `getAllClinics` to handle case-insensitive status comparison:
 
-```typescript
+\`\`\`typescript
 status: (c.status || '').toLowerCase() === 'pending' ? 'Pending' : ...
-```
+\`\`\`
 
 This ensures clinics with `status='pending'` (lowercase in DB) are correctly identified as `'Pending'` (PascalCase in UI).
 
@@ -133,19 +133,19 @@ This ensures clinics with `status='pending'` (lowercase in DB) are correctly ide
 
 ### Issue: Trigger not firing
 **Check**: Ensure the trigger was created successfully
-```sql
+\`\`\`sql
 SELECT * FROM pg_trigger WHERE tgname = 'on_auth_user_created';
-```
+\`\`\`
 
 ### Issue: Clinic created but status is not 'pending'
 **Check**: Verify the trigger function
-```sql
+\`\`\`sql
 SELECT prosrc FROM pg_proc WHERE proname = 'handle_new_user_signup';
-```
+\`\`\`
 
 ### Issue: Existing signups not showing
 **Solution**: The trigger only works for NEW signups. For existing test accounts, manually update:
-```sql
+\`\`\`sql
 -- Find orphaned auth users (no profile)
 SELECT au.id, au.email, au.raw_user_meta_data
 FROM auth.users au
@@ -168,7 +168,7 @@ BEGIN
   INSERT INTO public.users (id, clinic_id, email, full_name, role, status)
   VALUES (v_user_id, v_clinic_id, 'test@example.com', 'Test User', 'admin', 'active');
 END $$;
-```
+\`\`\`
 
 ## Expected Behavior After Fix
 

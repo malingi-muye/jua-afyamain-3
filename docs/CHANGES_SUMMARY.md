@@ -259,32 +259,32 @@ This document lists all files created, modified, or updated to implement enterpr
 ## 📝 Configuration Requirements
 
 ### Email (Gmail SMTP)
-```
+\`\`\`
 GMAIL_SMTP_USER=your-email@gmail.com
 GMAIL_SMTP_PASSWORD=xxxx xxxx xxxx xxxx  (App Password, 16 chars)
 GMAIL_SMTP_HOST=smtp.gmail.com (optional)
 GMAIL_SMTP_PORT=587 (optional)
-```
+\`\`\`
 
 ### SMS (Twilio)
-```
+\`\`\`
 TWILIO_ACCOUNT_SID=your-account-sid
 TWILIO_AUTH_TOKEN=your-auth-token
 TWILIO_PHONE_NUMBER=+1234567890
-```
+\`\`\`
 
 ### Payment (Ready for implementation)
-```
+\`\`\`
 PAYSTACK_PUBLIC_KEY=pk_xxxxx
 PAYSTACK_SECRET_KEY=sk_xxxxx
 MPESA_CONSUMER_KEY=xxxxx
 MPESA_CONSUMER_SECRET=xxxxx
-```
+\`\`\`
 
 ### AI (Ready for implementation)
-```
+\`\`\`
 GEMINI_API_KEY=xxxxx
-```
+\`\`\`
 
 ---
 
@@ -377,10 +377,10 @@ All changes are backward compatible with existing code.
 5. **Charts not displaying**: Ensure patients have complete data
 
 ### Debug Mode
-```javascript
+\`\`\`javascript
 // Enable logging in services
 localStorage.setItem('debug', 'juaafya:*')
-```
+\`\`\`
 
 ### Logs Location
 - Browser console: Client-side errors

@@ -33,13 +33,13 @@ This document summarizes all implementations completed to transform JuaAfya into
 **Usage in Appointments**: Automatically sends confirmation emails and SMS when appointments are created.
 
 **Setup Required:**
-```
+\`\`\`
 1. Enable 2-Step Verification in your Gmail account
 2. Create an App Password (not your regular password)
 3. Set environment variables in Supabase:
    - GMAIL_SMTP_USER=your-email@gmail.com
    - GMAIL_SMTP_PASSWORD=your-app-password
-```
+\`\`\`
 
 ---
 
@@ -64,11 +64,11 @@ This document summarizes all implementations completed to transform JuaAfya into
 - Settings persistence in `admin_settings` table
 
 **Database Migration:**
-```sql
+\`\`\`sql
 -- Run this migration in Supabase SQL Editor:
 -- Content from: supabase/migrations/add_admin_settings_table.sql
 -- Includes RLS policies for super-admin access only
-```
+\`\`\`
 
 ---
 
@@ -172,11 +172,11 @@ This document summarizes all implementations completed to transform JuaAfya into
 - Scheduled reminders (ready for scheduler)
 
 **Setup Required:**
-```
+\`\`\`
 1. Connect Twilio account
 2. Set environment variable TWILIO_AUTH_TOKEN in Supabase
 3. Configure phone number format handling for your region
-```
+\`\`\`
 
 ---
 
@@ -212,9 +212,9 @@ This document summarizes all implementations completed to transform JuaAfya into
 - Medical literature references
 
 **Setup Required:**
-```
+\`\`\`
 Set environment variable: GEMINI_API_KEY=your-api-key
-```
+\`\`\`
 
 #### 3.3 Bulk Operations
 **Features to implement:**
@@ -246,7 +246,7 @@ Set environment variable: GEMINI_API_KEY=your-api-key
 ## 🔧 Configuration & Deployment
 
 ### Environment Variables Required
-```bash
+\`\`\`bash
 # Gmail SMTP
 GMAIL_SMTP_USER=your-email@gmail.com
 GMAIL_SMTP_PASSWORD=your-app-password
@@ -264,22 +264,22 @@ MPESA_CONSUMER_SECRET=your-secret
 
 # AI
 GEMINI_API_KEY=your-api-key
-```
+\`\`\`
 
 ### Database Migrations Required
-```bash
+\`\`\`bash
 # Run in Supabase SQL Editor:
 1. supabase/migrations/add_admin_settings_table.sql
    - Creates admin_settings table with RLS policies
-```
+\`\`\`
 
 ### Supabase Edge Functions to Deploy
-```bash
+\`\`\`bash
 supabase functions deploy send-email
 supabase functions deploy send-sms
 supabase functions deploy process-payment
 supabase functions deploy gemini-chat
-```
+\`\`\`
 
 ---
 
@@ -307,26 +307,26 @@ supabase functions deploy gemini-chat
 ## 🚀 Deployment Steps
 
 1. **Deploy Database Migrations**
-   ```bash
+   \`\`\`bash
    # Run in Supabase SQL Editor
    # Copy content from: supabase/migrations/add_admin_settings_table.sql
-   ```
+   \`\`\`
 
 2. **Deploy Edge Functions**
-   ```bash
+   \`\`\`bash
    supabase functions deploy send-email
    supabase functions deploy send-sms
    supabase functions deploy process-payment
-   ```
+   \`\`\`
 
 3. **Set Environment Variables** (in Supabase)
    - Add all required environment variables to Supabase dashboard
 
 4. **Deploy Application**
-   ```bash
+   \`\`\`bash
    npm run build
    npm run deploy  # Or use Netlify/Vercel
-   ```
+   \`\`\`
 
 5. **Verify Functionality**
    - Test email sending
